@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>{{isEditMode ? 'Edit' : 'Create'}} Customer</h2>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="customerForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required type="email">
+      <mat-error *ngIf="customerForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="customerForm.get('email')?.hasError('email')">
+        Please enter a valid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" required>
+      <mat-error *ngIf="customerForm.get('phone')?.hasError('required')">
+        Phone is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Website</mat-label>
+      <input matInput formControlName="website">
+    </mat-form-field>
+
+    <div formGroupName="company">
+      <mat-form-field appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Catch Phrase</mat-label>
+        <input matInput formControlName="catchPhrase">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>BS</mat-label>
+        <input matInput formControlName="bs">
+      </mat-form-field>
+    </div>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!customerForm.valid">
+        {{isEditMode ? 'Update' : 'Create'}} Customer
+      </button>
+      <button mat-button routerLink="/customers">Cancel</button>
+    </div>
+  </form>
+</div>
